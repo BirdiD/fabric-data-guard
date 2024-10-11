@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "fabric-data-guard"
+version = "0.1.0"
+description = ""
+authors = ["DOUCOURE, DIOULA <diioula.doucoure@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+pytest = "^8.3.3"
+pyspark = "^3.5.3"
+delta-spark = "^3.2.1"
+dummy-notebookutils = "^1.5.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
