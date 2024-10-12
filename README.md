@@ -44,7 +44,7 @@ fdg.add_expectation([
     ),
 ])
 
-# Read your data
+# Read your data from your lake is a pysaprk dataframe
 df = spark.sql("SELECT * FROM MyLakehouseName.MyDataAssetName")
 
 # Run validation
