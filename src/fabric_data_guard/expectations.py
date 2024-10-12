@@ -10,7 +10,7 @@ def create_expectation(expectation_type, **kwargs):
         **kwargs: Arguments to pass to the expectation constructor.
 
     Returns:
-        gx.Expectation: The created expectation object.
+        gx.Expectation: The created expectation object
     """
     expectation_class = getattr(gx.expectations, expectation_type)
     return expectation_class(**kwargs)
