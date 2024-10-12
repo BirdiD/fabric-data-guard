@@ -11,7 +11,16 @@ pytest = "^8.3.3"
 pyspark = "^3.5.3"
 delta-spark = "^3.2.1"
 dummy-notebookutils = "^1.5.3"
+great-expectations = "^1.1.2"
 
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^4.0.1"
+black = "^24.10.0"
+isort = "^5.13.2"
+
+[tool.isort]
+profile = "black"
 
 [build-system]
 requires = ["poetry-core"]
