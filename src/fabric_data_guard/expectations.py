@@ -15,6 +15,3 @@ def create_expectation(expectation_type, **kwargs):
     """
     expectation_class = getattr(gx.expectations, expectation_type)
     return expectation_class(**kwargs)
-
-
-# You can add more utility functions here if needed in the future
