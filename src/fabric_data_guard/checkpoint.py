@@ -52,7 +52,7 @@ def create_checkpoint(fabric_data_guard, **kwargs):
         actions.append(
             gx.checkpoint.MicrosoftTeamsNotificationAction(
                 name="send_microsoft_teams_notification_on_validation_result",
-                microsoft_teams_webhook=kwargs.get("microsoft_teams_webhook"),
+                teams_webhook=kwargs.get("teams_webhook"),
                 notify_on=kwargs.get("notify_on", "failure"),
             )
         )

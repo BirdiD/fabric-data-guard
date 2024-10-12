@@ -51,3 +51,5 @@ main_schema = StructType(
         ),
     ]
 )
+
+project_root_dir = "/lakehouse/default/Files"
