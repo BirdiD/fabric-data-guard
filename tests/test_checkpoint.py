@@ -2,7 +2,7 @@ from unittest.mock import Mock, patch
 
 import great_expectations as gx
 
-from fabric_data_guard.checkpoint import create_checkpoint
+from src.fabric_data_guard.checkpoint import create_checkpoint
 
 
 def test_create_checkpoint_basic(mock_fabric_data_guard):

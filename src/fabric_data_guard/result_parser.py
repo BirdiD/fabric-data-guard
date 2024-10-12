@@ -21,14 +21,17 @@ def parse_validation_results(validation_results):
         active_batch_definition = meta.get("active_batch_definition", {})
         run_id = meta.get("run_id", {})
 
+        run_time = run_id.get("run_time")
+        validation_time = meta.get("validation_time")
+
         main_row = {
             "DatasourceName": active_batch_definition.get("datasource_name"),
             "DataAssetName": active_batch_definition.get("data_asset_name"),
             "ValidationId": meta.get("validation_id"),
             "CheckpointId": meta.get("checkpoint_id"),
             "RunName": run_id.get("run_name"),
-            "RunTime": run_id.get("run_time").isoformat(),
-            "ValidationTime": meta.get("validation_time").isoformat(),
+            "RunTime": run_time.isoformat() if run_time else None,
+            "ValidationTime": validation_time.isoformat() if validation_time else None,
             "TestStatus": "Success" if v.get("success", False) else "Failure",
             "SuiteName": v.get("suite_name"),
             "EvaluatedExpectations": statistics.get("evaluated_expectations"),
