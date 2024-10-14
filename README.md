@@ -52,6 +52,58 @@ results = fdg.run_validation(df, unexpected_identifiers=['UserId'])
 
 ```
 
+## Customizing Validation Run
+
+The `run_validation` function accepts several keyword arguments that allow you to customize its behavior:
+
+#### 1. Display HTML Results:
+
+```python
+results = fdg.run_validation(df, display_html=True)
+```
+Set **`display_html=False`** to suppress the HTML output (default is True).
+
+#### 2. Custom Target Table:
+
+```python
+results = fdg.run_validation(df, table_name="MyCustomResultsTable")
+```
+Specify a custom name for the table where results will be stored.
+#### 3. Custom Workspace and Lakehouse:
+
+```python
+results = fdg.run_validation(df, workspace_name="MyWorkspace", lakehouse_name="MyLakehouse")
+```
+
+By default, it uses the workspace and lakehouse attached to the running notebook. Use these parameters to specify different locations.
+
+#### 4. Notification Settings::
+Below an example usage. See `checkpoint.py` to check all required arguments for your use case (Microsoft Teams, Slack or Email)
+
+```python
+results = fdg.run_validation(df, 
+                             slack_notification=True, 
+                             slack_webhook="https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK",
+                             email_notification=True,
+                             email_to="user@example.com",
+                             teams_notification=True,
+                             teams_webhook="https://outlook.office.com/webhook/YOUR/TEAMS/WEBHOOK")
+```
+
+You can combine these options as needed:
+
+
+```python
+results = fdg.run_validation(df, 
+                             display_html=True,
+                             table_name="MyCustomResultsTable",
+                             workspace_name="MyWorkspace",
+                             lakehouse_name="MyLakehouse",
+                             slack_notification=True,
+                             slack_webhook="https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK",
+                             unexpected_identifiers=['UserId', 'TransactionId'])
+```
+This flexibility allows you to tailor the validation process to your specific needs and integrate it seamlessly with your existing data quality workflows.
 ## Contributing
 Contributions to FabricDataGuard are welcome! If you'd like to contribute:
 
