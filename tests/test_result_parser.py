@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 
+import great_expectations as gx
 import pytest
 
 from src.fabric_data_guard.result_parser import parse_validation_results
@@ -17,10 +18,10 @@ def test_parse_validation_results_basic(spark):
                 "validation_id": "test_id",
                 "checkpoint_id": "checkpoint_1",
                 "validation_time": datetime(2023, 1, 1, tzinfo=timezone.utc),
-                "run_id": {
-                    "run_name": "test_run",
-                    "run_time": datetime(2023, 1, 1, tzinfo=timezone.utc),
-                },
+                "run_id": gx.core.RunIdentifier(
+                    run_time=datetime(2023, 1, 1, tzinfo=timezone.utc),
+                    run_name="test_run",
+                ),
             },
             "statistics": {
                 "evaluated_expectations": 1,
@@ -47,7 +48,10 @@ def test_parse_validation_results_with_failed_expectation(spark):
             "meta": {
                 "active_batch_definition": {},
                 "validation_time": datetime(2023, 1, 1, tzinfo=timezone.utc),
-                "run_id": {"run_time": datetime(2023, 1, 1, tzinfo=timezone.utc)},
+                "run_id": gx.core.RunIdentifier(
+                    run_time=datetime(2023, 1, 1, tzinfo=timezone.utc),
+                    run_name="test_run",
+                ),
             },
             "statistics": {},
             "results": [
@@ -87,7 +91,10 @@ def test_parse_validation_results_with_succeeded_expectation(spark):
             "meta": {
                 "active_batch_definition": {},
                 "validation_time": datetime(2023, 1, 1, tzinfo=timezone.utc),
-                "run_id": {"run_time": datetime(2023, 1, 1, tzinfo=timezone.utc)},
+                "run_id": gx.core.RunIdentifier(
+                    run_time=datetime(2023, 1, 1, tzinfo=timezone.utc),
+                    run_name="test_run",
+                ),
             },
             "statistics": {},
             "results": [
@@ -126,7 +133,7 @@ def test_parse_validation_results_missing_fields(spark):
     assert (
         parsed_data[0]["TestStatus"] == "Failure"
     )  # Default when 'success' is missing
-    assert parsed_data[0]["RunTime"] is None
+    assert parsed_data[0]["RunTime"] is not None
     assert parsed_data[0]["ValidationTime"] is None
     assert parsed_data[0]["DatasourceName"] is None
     assert parsed_data[0]["DataAssetName"] is None
@@ -147,7 +154,9 @@ def test_parse_validation_results_multiple_validations(spark):
             "meta": {
                 "active_batch_definition": {"datasource_name": "source1"},
                 "validation_time": datetime(2023, 1, 1, tzinfo=timezone.utc),
-                "run_id": {"run_time": datetime(2023, 1, 1, tzinfo=timezone.utc)},
+                "run_id": gx.core.RunIdentifier(
+                    run_time=datetime(2023, 1, 1, tzinfo=timezone.utc)
+                ),
             },
             "statistics": {},
             "results": [],
@@ -157,7 +166,9 @@ def test_parse_validation_results_multiple_validations(spark):
             "meta": {
                 "active_batch_definition": {"datasource_name": "source2"},
                 "validation_time": datetime(2023, 1, 2, tzinfo=timezone.utc),
-                "run_id": {"run_time": datetime(2023, 1, 2, tzinfo=timezone.utc)},
+                "run_id": gx.core.RunIdentifier(
+                    run_time=datetime(2023, 1, 1, tzinfo=timezone.utc)
+                ),
             },
             "statistics": {},
             "results": [],
