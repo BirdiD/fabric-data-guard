@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fabric-data-guard"
-version = "0.0.2"
+version = "0.0.3"
 description = "A library for data quality checks in Microsoft Fabric using Great Expectations"
 authors = ["DOUCOURE, DIOULA <diioula.doucoure@gmail.com>"]
 readme = "README.md"
@@ -16,7 +16,7 @@ delta-spark = "^3.2.1"
 dummy-notebookutils = "^1.5.3"
 great-expectations = "^1.1.2"
 semantic-link = "^0.8.0"
-ipython = "^8.28.0"
+ipython = "8.14.0"
 azure-core = "^1.31.0"
 azure-storage-blob = "^12.23.1"
 pyjwt = "^2.9.0"
